@@ -1,11 +1,11 @@
 ## Angularjs GreenHsec Table
 
 ## Instalación desde Bower
-    bower install --save ng-ghsec-table
+    bower install --save ng-template-table
 
 ## Modo de uso
-    <div ng-greenhsec-table></div>
-    <ng-greenhsec-table></ng-greenhsec-table>
+    <div ng-template-table></div>
+    <ng-template-table></ng-template-table>
     
 ## Parametros
     template: direccion del template 
@@ -17,7 +17,7 @@
     
    
 ## Ejemplo    
-    <div ng-greenhsec-table 
+    <div ng-template-table 
     template="template2.html" 
     data="data" 
     order="true"  
