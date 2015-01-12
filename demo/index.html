@@ -5,34 +5,90 @@
     <title></title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
 </head>
-<body ng-app="demo" ng-controller="demoCtrl"  >
-<script type="text/ng-template" id="template3.html">
-    <div class="panel panel-default" ng-repeat="value in data">
-        <div class="panel-body">
-            {{$index+1}} - {{value.name}} - {{value.age}} - {{value.money}}
-        </div>
-    </div>
-</script>
+<body ng-app="demo" ng-controller="demoCtrl">
+
 <script type="text/ng-template" id="template1.html">
-    <div class="panel panel-default" ng-repeat="value in data">
-        <div class="panel-body">
-            {{$index+1}} - {{value.name}} - {{value.age}} - {{value.money}}
+    <div class="bs-callout bs-callout-info" ng-repeat="value in data">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-8">
+                    <h4>{{value.plan}}</h4>
+                    <i class="icon-calendar"> </i><strong> Inicio</strong> {{value.inicio}} |
+                    <i class="icon-calendar"> </i><strong> Fin</strong> {{value.termino}}
+                    <hr class="hr">
+
+                    <p>
+                        {{value.descripcion}}
+                    </p>
+                    <span class="label label-primary">{{value.area}}</span>
+                    <span class="label label-primary">{{value.proyecto}}</span>
+                    <span class="label label-primary">{{value.contrato}}</span>
+                    <span class="label label-primary">{{value.responsable}}</span>
+
+                </div>
+                <div class="col-md-4">
+
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="panel bg-danger">
+                                    <div class="panel-body align-center">
+                                        <h2>100</h2>
+
+                                        <p class="mb0 text-muted">Actividades Pendientes</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="panel bg-success">
+                                    <div class="panel-body align-center">
+                                        <h2>30</h2>
+
+                                        <p class="mb0 text-muted">Acciones Pendientes</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel bg-warning">
+                                    <div class="panel-body align-center">
+                                        <h2>{{value.progreso}} </h2>
+
+                                        <p class="mb0 text-muted">Cumplimiento</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </script>
+
 <div class="btn-group" role="group" aria-label="...">
-    <button type="button" ng-click="tipo='table'" class="btn btn-default">Table</button>
-    <button type="button"  ng-click="tipo='template3'" class="btn btn-default">template3</button>
+    <button type="button" ng-click="tipo='table'" class="btn btn-default">Vista Resumen</button>
+    <button type="button" ng-click="tipo='template1'" class="btn btn-default">Tabular</button>
 
 </div>
 
-<div ng-template-table table type="tipo"  data="data" order="true" search="true" paginate="true" numperpage="5"></div>
+<div class="container-fluid">
 
+    <div class="col-lg-12">
+        <div ng-template-table table type="tipo" data="data" order="true" search="true" paginate="true"
+             numperpage="5"></div>
+    </div>
+
+</div>
 
 <script src="../../bower_components/angularjs/angular.js"></script>
+<script src="../../bower_components/angular-animate/angular-animate.min.js"></script>
 <script src="../../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 <script src="../ngTemplateTableDirective.js"></script>
 <link rel="stylesheet" href="../css/style.css"/>
+<link rel="stylesheet" href="style.css"/>
 <script src="../pagination.js"></script>
 <script src="../template.js"></script>
 <script src="demoCtrl.js"></script>

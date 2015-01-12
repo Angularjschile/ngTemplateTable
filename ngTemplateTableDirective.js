@@ -166,7 +166,7 @@ angular.module('ngTemplateTable', ['ui.bootstrap.pagination', 'ngSanitize'])
                 })
 
 
-                scope.ghnumberPerPage = [5, 10, 20, 30, 40];
+                scope.ghnumberPerPage = [3,5, 10, 20, 30, 40];
             }
         }
     }).filter('capitalize', function () {

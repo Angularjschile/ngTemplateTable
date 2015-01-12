@@ -9,30 +9,84 @@
  * */
 
 
-angular.module('demo',['ngTemplateTable'])
-    .controller('demoCtrl', function($scope){
-        $scope.tipo='table';
+angular.module('demo', ['ngTemplateTable'])
+    .controller('demoCtrl', function ($scope) {
+        $scope.tipo = 'table';
         $scope.currentPage = 10;
+        $scope.rojo =   Math.floor(Math.random() * 101) ;
+        $scope.verde =   Math.floor(Math.random() * 101) ;
 
-        $scope.data = [
-            {name: "Moroni", age: 50, money: -10},
-            {name: "Tiancum", age: 43,money: 120},
-            {name: "Jacob", age: 27, money: 5.5},
-            {name: "Nephi", age: 29,money: -54},
-            {name: "Enos", age: 34,money: 110},
-            {name: "Tiancum", age: 43, money: 1000},
-            {name: "Jacob", age: 27,money: -201},
-            {name: "Nephi", age: 29, money: 100},
-            {name: "Enos", age: 34, money: -52.5},
-            {name: "Tiancum", age: 43, money: 52.1},
-            {name: "Jacob", age: 27, money: 110},
-            {name: "Nephi", age: 29, money: -55},
-            {name: "Enos", age: 34, money: 551},
-            {name: "Tiancum", age: 43, money: -1410},
-            {name: "Jacob", age: 27, money: 410},
-            {name: "Nephi", age: 29, money: 100},
-            {name: "Enos", age: 34, money: -100}
-        ];
+        $scope.data =
+
+            [{
+
+                "plan": "plan 348",
+                "descripcion": "plan 348",
+                "area": "Vantaz 1.1.1",
+                "proyecto": "Gesti\u00f3n HSEC Vantaz",
+                "contrato": "Gesti\u00f3n HSEC",
+                "responsable": "Eduardo Chand\u00eda",
+                "estado": "Ejecucci\u00f3n",
+                "inicio": null,
+                "termino": null,
+                "progreso": "0 %",
+                "alcance": "H S E",
+                "semaforo": null
+            }, {
+                "plan": "demo 4",
+                "descripcion": "demo",
+                "area": "Vantaz 1.3",
+                "proyecto": "Gesti\u00f3n HSEC Vantaz",
+                "contrato": "Gesti\u00f3n HSEC",
+                "responsable": "German Rodriguez",
+                "estado": "Registrado",
+                "inicio": "04-01-2015",
+                "termino": "13-01-2015",
+                "progreso": "50 %",
+                "alcance": "H S E C",
+                "semaforo": "#bd362f"
+            }, {
+                "plan": "asd",
+                "descripcion": "asd",
+                "area": "Vantaz 1.1.1",
+                "proyecto": "Gesti\u00f3n HSEC Vantaz",
+                "contrato": "Gesti\u00f3n HSEC",
+                "responsable": "Claudio Lemus",
+                "estado": "Creaci\u00f3n",
+                "inicio": null,
+                "termino": null,
+                "progreso": "0 %",
+                "alcance": "H",
+                "semaforo": null
+            }, {
+
+                "plan": "plan 3",
+                "descripcion": "plan",
+                "area": "Vantaz",
+                "proyecto": "Gesti\u00f3n HSEC Vantaz",
+                "contrato": "Gesti\u00f3n HSEC",
+                "responsable": "GABRIEL MU\u00d1OZ",
+                "estado": "Creaci\u00f3n",
+                "inicio": "04-01-2015",
+                "termino": "15-01-2015",
+                "progreso": "25 %",
+                "alcance": "H",
+                "semaforo": "#bd362f"
+            }, {
+
+                "plan": "plan depasd",
+                "descripcion": "asdasd",
+                "area": "Vantaz",
+                "proyecto": "Gesti\u00f3n HSEC Vantaz",
+                "contrato": "Gesti\u00f3n HSEC",
+                "responsable": "Sim\u00f3n Sagredo",
+                "estado": "Creaci\u00f3n",
+                "inicio": "09-01-2015",
+                "termino": "16-07-2015",
+                "progreso": "0 %",
+                "alcance": " S",
+                "semaforo": "#51a351"
+            }]
 
 
     });
