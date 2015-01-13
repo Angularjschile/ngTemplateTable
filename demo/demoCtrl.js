@@ -15,13 +15,15 @@ angular.module('demo', ['ngTemplateTable'])
         $scope.currentPage = 10;
         $scope.rojo =   Math.floor(Math.random() * 101) ;
         $scope.verde =   Math.floor(Math.random() * 101) ;
-
+        $scope.column=[
+            {data:'plan',name:'Plan de Acción',filter:true,order:true,type:'text',filterType:''}
+        ]
         $scope.data =
 
             [{
 
-                "plan": "plan 348",
-                "descripcion": "plan 348",
+                "plan": "Plan Creacion Garita",
+                "descripcion": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos  Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la impre",
                 "area": "Vantaz 1.1.1",
                 "proyecto": "Gesti\u00f3n HSEC Vantaz",
                 "contrato": "Gesti\u00f3n HSEC",
@@ -33,8 +35,8 @@ angular.module('demo', ['ngTemplateTable'])
                 "alcance": "H S E",
                 "semaforo": null
             }, {
-                "plan": "demo 4",
-                "descripcion": "demo",
+                "plan": "Plan Mantenimiento",
+                "descripcion": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos  Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la impre",
                 "area": "Vantaz 1.3",
                 "proyecto": "Gesti\u00f3n HSEC Vantaz",
                 "contrato": "Gesti\u00f3n HSEC",
@@ -47,7 +49,7 @@ angular.module('demo', ['ngTemplateTable'])
                 "semaforo": "#bd362f"
             }, {
                 "plan": "asd",
-                "descripcion": "asd",
+                "descripcion": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos  Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la impre",
                 "area": "Vantaz 1.1.1",
                 "proyecto": "Gesti\u00f3n HSEC Vantaz",
                 "contrato": "Gesti\u00f3n HSEC",
@@ -61,7 +63,7 @@ angular.module('demo', ['ngTemplateTable'])
             }, {
 
                 "plan": "plan 3",
-                "descripcion": "plan",
+                "descripcion": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos  Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la impre",
                 "area": "Vantaz",
                 "proyecto": "Gesti\u00f3n HSEC Vantaz",
                 "contrato": "Gesti\u00f3n HSEC",
@@ -75,7 +77,7 @@ angular.module('demo', ['ngTemplateTable'])
             }, {
 
                 "plan": "plan depasd",
-                "descripcion": "asdasd",
+                "descripcion": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos  Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la impre",
                 "area": "Vantaz",
                 "proyecto": "Gesti\u00f3n HSEC Vantaz",
                 "contrato": "Gesti\u00f3n HSEC",

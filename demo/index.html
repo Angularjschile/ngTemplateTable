@@ -30,6 +30,17 @@
 
                     <div class="col-md-12">
                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel bg-warning">
+                                    <div class="panel-body align-center">
+                                        <h2>{{value.progreso}} </h2>
+
+                                        <p class="mb0 text-muted">Cumplimiento</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="panel bg-danger">
                                     <div class="panel-body align-center">
@@ -49,17 +60,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel bg-warning">
-                                    <div class="panel-body align-center">
-                                        <h2>{{value.progreso}} </h2>
 
-                                        <p class="mb0 text-muted">Cumplimiento</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -69,15 +70,15 @@
 </script>
 
 <div class="btn-group" role="group" aria-label="...">
-    <button type="button" ng-click="tipo='table'" class="btn btn-default">Vista Resumen</button>
-    <button type="button" ng-click="tipo='template1'" class="btn btn-default">Tabular</button>
+    <button type="button" ng-click="tipo='table'" class="btn btn-default">Tabular</button>
+    <button type="button" ng-click="tipo='template1'" class="btn btn-default">Vista Resumen</button>
 
 </div>
 
 <div class="container-fluid">
 
     <div class="col-lg-12">
-        <div ng-template-table table type="tipo" data="data" order="true" search="true" paginate="true"
+        <div ng-template-table table  type="tipo" data="data"  column="column" order="true" search="true" paginate="true"
              numperpage="5"></div>
     </div>
 
@@ -86,11 +87,16 @@
 <script src="../../bower_components/angularjs/angular.js"></script>
 <script src="../../bower_components/angular-animate/angular-animate.min.js"></script>
 <script src="../../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-<script src="../ngTemplateTableDirective.js"></script>
+<script src="../src/ngTemplateTableDirective.js"></script>
 <link rel="stylesheet" href="../css/style.css"/>
 <link rel="stylesheet" href="style.css"/>
-<script src="../pagination.js"></script>
-<script src="../template.js"></script>
+
+<script src="../src/pagination.js"></script>
+<script src="../src/template.js"></script>
+<script src="../src/popover-html.js"></script>
+<script src="../src/filter.js"></script>
+<script src="../bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 <script src="demoCtrl.js"></script>
 
 </body>

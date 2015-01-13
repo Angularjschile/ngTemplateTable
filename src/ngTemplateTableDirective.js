@@ -9,7 +9,7 @@
  * */
 
 
-angular.module('ngTemplateTable', ['ui.bootstrap.pagination', 'ngSanitize'])
+angular.module('ngTemplateTable', ['ui.bootstrap','ui.bootstrap.pagination', 'ngSanitize' ])
     .run(function (paginationConfig) {
         paginationConfig.firstText = 'Primer';
         paginationConfig.previousText = 'Anterior';
@@ -27,7 +27,8 @@ angular.module('ngTemplateTable', ['ui.bootstrap.pagination', 'ngSanitize'])
                 paginate: '=',
                 numperpage: '=',
                 order: '=',
-                search: '='
+                search: '=',
+                column: '='
             },
             template: '<ng-include src="getTemplateUrl()"  />',
 
@@ -42,18 +43,6 @@ angular.module('ngTemplateTable', ['ui.bootstrap.pagination', 'ngSanitize'])
 
             },
             link: function (scope, element, attrs) {
-
-                /*
-                 scope.$watch('type',function(){
-                 console.log(scope.type)
-                 var templateUrl = scope.type;
-                 $http.get(templateUrl, {cache: $templateCache}).success(function (tplContent) {
-
-                 element.replaceWith($compile(tplContent)(scope));
-                 element=$compile(tplContent)(scope)
-                 });
-                 })
-                 */
 
 
                 scope.ghnumperpage = 0;
@@ -71,7 +60,15 @@ angular.module('ngTemplateTable', ['ui.bootstrap.pagination', 'ngSanitize'])
 
                     for (var i in scope.resp[0]) {
                         if (i !== '$$hashKey')
-                            scope.ordered_columns.push(i);
+                        {
+                            var column=$filter('filter')(scope.column, {data:i},true);
+                            if (column[0]!==undefined)
+                                 scope.ordered_columns.push({id:i,name:column[0].name});
+                            else
+                                scope.ordered_columns.push({id:i,name:i});
+
+
+                        }
                     }
 
                 };
@@ -107,8 +104,15 @@ angular.module('ngTemplateTable', ['ui.bootstrap.pagination', 'ngSanitize'])
                     if (scope.order == true) {
                         pag = pag + '<div class="btn-group" ng-show="type!=\'table\'" role="group" aria-label="...">';
                         for (var i in scope.resp[0]) {
-                            if (i !== '$$hashKey')
-                                pag = pag + '<button  ng-class="{\'ghboth\':ghfiltername!=\'' + i + '\',\'ghdesc\':ghfiltername==\'' + i + '\' && ghrev,\'ghasc\':ghfiltername==\'' + i + '\' && !ghrev}" type="button" ng-click="ghOrder(\'' + i + '\')" class="btn btn-default">' + i + '</button>'
+                            var column=$filter('filter')(scope.column, {data:i},true);
+                            var name= i;
+                            if (column[0]!==undefined){
+                                name=column[0].name
+                            }
+                            if (i !== '$$hashKey') {
+                                var menu="<ul><li><input type='checkbox'/><span>hola</span></li></ul>";
+                                pag = pag + '<div class="btn-group"> <button   ng-class="{\'ghboth\':ghfiltername!=\'' + i + '\',\'ghdesc\':ghfiltername==\'' + i + '\' && ghrev,\'ghasc\':ghfiltername==\'' + i + '\' && !ghrev}" type="button" ng-click="ghOrder(\'' + i + '\')" class="btn btn-default">' + name + '</button><button type="button" class="btn btn-default dropdown-toggle" popover-placement="bottom" popover-html-unsafe="'+menu+'"><span class="caret"></span></button></div>'
+                            }
                         }
 
                         pag = pag + '</div>';
@@ -137,8 +141,8 @@ angular.module('ngTemplateTable', ['ui.bootstrap.pagination', 'ngSanitize'])
                 }
 
                 scope.ghfilters = function () {
-                    if (scope.resp.length==0)
-                        scope.resp=scope.data;
+                    if (scope.resp.length == 0)
+                        scope.resp = scope.data;
                     if (scope.order == true) {
                         scope.data = $filter('orderBy')(scope.resp, scope.ghfiltername, scope.ghrev);
 
@@ -166,31 +170,7 @@ angular.module('ngTemplateTable', ['ui.bootstrap.pagination', 'ngSanitize'])
                 })
 
 
-                scope.ghnumberPerPage = [3,5, 10, 20, 30, 40];
+                scope.ghnumberPerPage = [3, 5, 10, 20, 30, 40];
             }
         }
-    }).filter('capitalize', function () {
-        return function (input, format) {
-            if (!input) {
-                return input;
-            }
-            format = format || 'all';
-            if (format === 'first') {
-
-                return input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
-            } else {
-                var words = input.split(' ');
-                var result = [];
-                words.forEach(function (word) {
-                    if (word.length === 2 && format === 'team') {
-
-                        result.push(word.toUpperCase());
-                    } else {
-                        result.push(word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
-                    }
-                });
-                return result.join(' ');
-            }
-        };
-        ;
     })

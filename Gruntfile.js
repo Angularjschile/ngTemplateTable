@@ -6,7 +6,7 @@ grunt.loadNpmTasks('grunt-angular-templates');
         ngtemplates:  {
             app:        {
                 src:      'template/**.html',
-                dest:     'template.js',
+                dest:     'src/template.js',
                 options:  {
                     url:    function(url) { return url.replace('template/', ''); },
                     htmlmin:  { collapseWhitespace: true, collapseBooleanAttributes: true },
