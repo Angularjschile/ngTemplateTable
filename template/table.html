@@ -22,7 +22,7 @@
                 </th>
             </tr>
             <tbody>
-            <tr ng-repeat="d in data">
+            <tr ng-repeat="d in data" class="animate-repeat">
                 <td ng-repeat="c in ordered_columns" ng-show="c.view">
                     <p class="{{c.class}}">{{ d[c.id] }} <i ng-show="c.class=='ngtemplate-percentage'">%</i></p>
                 </td>

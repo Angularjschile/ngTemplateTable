@@ -9,7 +9,7 @@
  * */
 
 
-angular.module('ngTemplateTable', ['ui.bootstrap', 'ngSanitize', 'nsPopover', 'angular.filter'])
+angular.module('ngTemplateTable', ['ui.bootstrap', 'ngSanitize', 'nsPopover', 'angular.filter','ngAnimate'])
     .run(function (paginationConfig) {
         paginationConfig.firstText = 'Primer';
         paginationConfig.previousText = 'Anterior';
@@ -114,7 +114,7 @@ angular.module('ngTemplateTable', ['ui.bootstrap', 'ngSanitize', 'nsPopover', 'a
                                 scope.omit.splice(index2, 1);
                             }
                         }
-                    console.log(scope.omit)
+
                     scope.ghfilters();
                 }
                 scope.ngFilterCheck = function (id, valor, estado) {
@@ -165,25 +165,8 @@ angular.module('ngTemplateTable', ['ui.bootstrap', 'ngSanitize', 'nsPopover', 'a
                         '<div class="col-md-7">';
                     if (scope.order == true) {
                         pag = pag + '<div class="btn-group" ng-show="type!=\'table\'" role="group" aria-label="...">';
-                        scope.btndata = [];
-                        for (var i in scope.resp[0]) {
-                            var column = $filter('filter')(scope.column, {data: i}, true);
-                            var name = i;
-                            if (column[0] !== undefined) {
-                                name = column[0].name
-                            }
-                            if (i !== '$$hashKey') {
 
-                                var item = [];
-                                var unique = $filter('unique')(scope.resp, i);
-                                for (var iu = 0; iu < unique.length; iu++) {
-                                    item.push({value: unique[iu][i], state: true})
-                                }
-                                scope.btndata.push({id: i, name: name, items: item});
-                                //'<div class="btn-group dropdown-checkbox dropdown"> <button   ng-class="{\'ghboth\':ghfiltername!=\'' + i + '\',\'ghdesc\':ghfiltername==\'' + i + '\' && ghrev,\'ghasc\':ghfiltername==\'' + i + '\' && !ghrev}" type="button" ng-click="ghOrder(\'' + i + '\')" class="btn btn-default">' + name + '</button><button type="button" class="btn btn-default dropdown-toggle" popover-placement="bottom" popover-html-unsafe="'+menu+'"><span class="caret"></span></button></div>'
-                            }
-                        }
-                        var btn = '<div btn-order-filter data="btndata"></div>';
+                        var btn = '<div btn-order-filter data="ordered_columns"></div>';
                         pag = pag + btn;
 
                         pag = pag + '</div>';
