@@ -16,7 +16,16 @@ angular.module('demo', ['ngTemplateTable'])
         $scope.rojo =   Math.floor(Math.random() * 101) ;
         $scope.verde =   Math.floor(Math.random() * 101) ;
         $scope.column=[
-            {data:'plan',name:'Plan de Acción',filter:true,order:true,type:'text',filterType:''}
+            {data:'plan',name:'Plan de Acción',filter:true,order:true,type:'text',filterType:'',visible:true},
+            {data:'descripcion',name:'Descripción',filter:true,order:true,type:'text',filterType:'',visible:false},
+            {data:'area',name:'Area',filter:true,order:true,type:'text',filterType:'',visible:true},
+            {data:'proyecto',name:'Proyecto',filter:true,order:true,type:'text',filterType:'',visible:true},
+            {data:'contrato',name:'Contrato',filter:true,order:true,type:'text',filterType:'',visible:true},
+            {data:'responsvisible',name:'Responsable',filter:true,order:true,type:'text',filterType:'',visible:true},
+            {data:'estado',name:'Estado',filter:true,order:true,type:'text',filterType:'',visible:true},
+            {data:'inicio',name:'Fecha Inicio',filter:true,order:true,type:'date',filterType:'',visible:true},
+            {data:'termino',name:'Fecha Termino',filter:true,order:true,type:'date',filterType:'',visible:true},
+            {data:'progreso',name:'Progreso',filter:true,order:true,type:'number',filterType:'',visible:true}
         ]
         $scope.data =
 

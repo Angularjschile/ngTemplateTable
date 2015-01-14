@@ -57,7 +57,7 @@ SOFTWARE.
   margin-left: 2px;
 }
 .dropdown-checkbox .dropdown-checkbox-content {
-  display: none;
+
   position: absolute;
   background: white;
   z-index: 1000;

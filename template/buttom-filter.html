@@ -1,7 +1,13 @@
-<div class="btn-group">
+<div class="btn-group" ng-repeat="btndata in data">
     <button ng-class="{'ghboth':ghfiltername!=btndata.id,'ghdesc':ghfiltername==btndata.id && ghrev,'ghasc':ghfiltername==btndata.id && !ghrev}"
             type="button" ng-click="ghOrder(btndata.id)" class="btn btn-default">{{btndata.name}}
     </button>
-    <button type="button" class="btn btn-default dropdown-toggle" popover-placement="bottom"
-            popover-html-unsafe="On the <b>Bottom</b>!"><span class="caret"></span></button>
+    <button ns-popover
+            ns-popover-template="popover-data.html"
+            ns-popover-trigger="click"
+            ns-popover-placement="bottom" ns-popover-theme="ns-popover-tooltip-theme" class="btn btn-default  "><span
+            class="caret"></span>
+
+    </button>
+
 </div>

@@ -9,7 +9,7 @@
  * */
 
 
-angular.module('ngTemplateTable', ['ui.bootstrap','ui.bootstrap.pagination', 'ngSanitize' ])
+angular.module('ngTemplateTable', ['ui.bootstrap', 'ngSanitize', 'nsPopover', 'angular.filter'])
     .run(function (paginationConfig) {
         paginationConfig.firstText = 'Primer';
         paginationConfig.previousText = 'Anterior';
@@ -59,21 +59,83 @@ angular.module('ngTemplateTable', ['ui.bootstrap','ui.bootstrap.pagination', 'ng
                     scope.ordered_columns = [];
 
                     for (var i in scope.resp[0]) {
-                        if (i !== '$$hashKey')
-                        {
-                            var column=$filter('filter')(scope.column, {data:i},true);
-                            if (column[0]!==undefined)
-                                 scope.ordered_columns.push({id:i,name:column[0].name});
+                        if (i !== '$$hashKey') {
+
+                            var item = [];
+                            var unique = $filter('unique')(scope.resp, i);
+                            for (var iu = 0; iu < unique.length; iu++) {
+                                var fil = $filter('filter')(scope.omit, {id: i,data:unique[iu][i]}, true);
+
+                                var state = true;
+                                if (fil[0] !== undefined)
+                                    state = false;
+                                item.push({value: unique[iu][i], state: state})
+                            }
+                            var column = $filter('filter')(scope.column, {data: i}, true);
+                            if (column[0] !== undefined) {
+
+                                scope.ordered_columns.push({
+                                    id: i,
+                                    name: column[0].name,
+                                    view: column[0].visible,
+                                    class: 'ngtemplate-' + column[0].type,
+                                    items: item,
+                                    all:true
+                                });
+                            }
                             else
-                                scope.ordered_columns.push({id:i,name:i});
+                                scope.ordered_columns.push({id: i, name: i, view: true, items: item,all:true});
 
 
                         }
                     }
 
                 };
+                scope.omit = [];
+
+                scope.selectAll=function(id,state){
+
+                    var fil = $filter('filter')(scope.ordered_columns, {id:id});
+
+                    var index = scope.ordered_columns.indexOf(fil[0]);
+
+                        for (var i=0;i<scope.ordered_columns[index].items.length;i++){
+                            scope.ordered_columns[index].items[i].state=state;
+                            var filtro;
+                            if (state)
+                                filtro = id + '!=="' + scope.ordered_columns[index].items[i].value + '"';
+                            else
+                                filtro = id + '=="' + scope.ordered_columns[index].items[i].value + '"';
+                            if (!state)
+                                scope.omit.push({value: filtro, id: id,data:scope.ordered_columns[index].items[i].value});
+                            else {
+                                var fil = $filter('filter')(scope.omit, {id:id,data:scope.ordered_columns[index].items[i].value} );
+                                var index2 = scope.omit.indexOf(fil);
+                                scope.omit.splice(index2, 1);
+                            }
+                        }
+                    console.log(scope.omit)
+                    scope.ghfilters();
+                }
+                scope.ngFilterCheck = function (id, valor, estado) {
+                    console.log(id,valor+' '+estado)
+                    var filtro;
+                    if (estado)
+                        filtro = id + '!=="' + valor + '"';
+                    else
+                        filtro = id + '=="' + valor + '"';
+                    if (!estado)
+                        scope.omit.push({value: filtro, id: id,data:valor});
+                    else {
+                        var fil = $filter('filter')(scope.omit, {id:id,data:valor} );
+                        var index = scope.omit.indexOf(fil[0]);
+                        scope.omit.splice(index, 1);
+                    }
+                    console.log(scope.omit)
+                    scope.ghfilters();
 
 
+                };
                 scope.ghsearch = '';
                 scope.ghfiltername = '';
 
@@ -103,17 +165,26 @@ angular.module('ngTemplateTable', ['ui.bootstrap','ui.bootstrap.pagination', 'ng
                         '<div class="col-md-7">';
                     if (scope.order == true) {
                         pag = pag + '<div class="btn-group" ng-show="type!=\'table\'" role="group" aria-label="...">';
+                        scope.btndata = [];
                         for (var i in scope.resp[0]) {
-                            var column=$filter('filter')(scope.column, {data:i},true);
-                            var name= i;
-                            if (column[0]!==undefined){
-                                name=column[0].name
+                            var column = $filter('filter')(scope.column, {data: i}, true);
+                            var name = i;
+                            if (column[0] !== undefined) {
+                                name = column[0].name
                             }
                             if (i !== '$$hashKey') {
-                                var menu="<ul><li><input type='checkbox'/><span>hola</span></li></ul>";
-                                pag = pag + '<div class="btn-group"> <button   ng-class="{\'ghboth\':ghfiltername!=\'' + i + '\',\'ghdesc\':ghfiltername==\'' + i + '\' && ghrev,\'ghasc\':ghfiltername==\'' + i + '\' && !ghrev}" type="button" ng-click="ghOrder(\'' + i + '\')" class="btn btn-default">' + name + '</button><button type="button" class="btn btn-default dropdown-toggle" popover-placement="bottom" popover-html-unsafe="'+menu+'"><span class="caret"></span></button></div>'
+
+                                var item = [];
+                                var unique = $filter('unique')(scope.resp, i);
+                                for (var iu = 0; iu < unique.length; iu++) {
+                                    item.push({value: unique[iu][i], state: true})
+                                }
+                                scope.btndata.push({id: i, name: name, items: item});
+                                //'<div class="btn-group dropdown-checkbox dropdown"> <button   ng-class="{\'ghboth\':ghfiltername!=\'' + i + '\',\'ghdesc\':ghfiltername==\'' + i + '\' && ghrev,\'ghasc\':ghfiltername==\'' + i + '\' && !ghrev}" type="button" ng-click="ghOrder(\'' + i + '\')" class="btn btn-default">' + name + '</button><button type="button" class="btn btn-default dropdown-toggle" popover-placement="bottom" popover-html-unsafe="'+menu+'"><span class="caret"></span></button></div>'
                             }
                         }
+                        var btn = '<div btn-order-filter data="btndata"></div>';
+                        pag = pag + btn;
 
                         pag = pag + '</div>';
 
@@ -157,8 +228,13 @@ angular.module('ngTemplateTable', ['ui.bootstrap','ui.bootstrap.pagination', 'ng
                         scope.data = scope.data.slice(begin, end);
                     }
 
+                    if (scope.omit.length > 0) {
+                        for (var i = 0; i < scope.omit.length; i++)
+                            scope.data = $filter('omit')(scope.data, scope.omit[i].value);
+                    }
+
                     if (scope.type == 'table') {
-                        scope.renderTable();
+                        //scope.renderTable();
                     }
 
 
