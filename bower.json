@@ -2,10 +2,8 @@
   "name": "ng-template-table",
   "version": "0.0.1",
   "main": [
-    "ngTemplateTableDirective.js",
-    "pagination.js",
-    "template.js",
-    "css/style.css"
+    "dist/ngTemplateTable.min.js",
+    "dist/ngTemplateTable.min.css"
   ],
   "ignore": [],
   "dependencies": {

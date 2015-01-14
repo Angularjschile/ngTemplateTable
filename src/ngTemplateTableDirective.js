@@ -10,14 +10,14 @@
 
 
 angular.module('ngTemplateTable', ['ui.bootstrap', 'ngSanitize', 'nsPopover', 'angular.filter','ngAnimate'])
-    .run(function (paginationConfig) {
+    .run(['paginationConfig',function (paginationConfig) {
         paginationConfig.firstText = 'Primer';
         paginationConfig.previousText = 'Anterior';
         paginationConfig.nextText = 'Siguiente';
         paginationConfig.lastText = 'Último';
 
-    })
-    .directive('ngTemplateTable', function ($templateCache, $compile, $filter, $sce, $http, $parse) {
+    }])
+    .directive('ngTemplateTable',['$templateCache', '$compile', '$filter', '$sce', '$http','$parse', function ($templateCache, $compile, $filter, $sce, $http, $parse) {
         return {
             restrict: 'AE',
             transclude: true,
@@ -232,4 +232,4 @@ angular.module('ngTemplateTable', ['ui.bootstrap', 'ngSanitize', 'nsPopover', 'a
                 scope.ghnumberPerPage = [3, 5, 10, 20, 30, 40];
             }
         }
-    })
+    }])
