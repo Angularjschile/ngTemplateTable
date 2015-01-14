@@ -1,5 +1,5 @@
 {
-  "name": "ng-template-table",
+  "name": "ngtemplatetable",
   "version": "0.0.1",
   "main": [
     "dist/ngTemplateTable.min.js",
