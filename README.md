@@ -1,4 +1,4 @@
-## Angularjs GreenHsec Table
+## Angularjs Template Table
 
 ## Instalación desde Bower
     bower install --save ng-template-table
